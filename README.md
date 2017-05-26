@@ -181,16 +181,19 @@ The following code should go between your index.html's ``<body>`` tags.
 ```
 
 
-### Song View
-Now back to JavaScript!
+### Backbone View
+Now back to JavaScript! The following instructions define how we are going to utilize a Backbone View. Note that the functionality described here is *a lot* more than what we are used to with a Rails view. Views in Backbone are a lot more like Controllers in Rails.
 
-There's a lot going on in this code. But first, we are creating a new Backbone View for a song by extending the Backbone View object: `Backbone.View.extend`.
+1. **Create the View**  
+First, we are creating a new Backbone View for a song by extending the Backbone View object: `Backbone.View.extend`.
 
+1. **Create the `initialize`*  
 In the initialize function, we set the template by passing it as an argument. This variable will eventually be set to the #song-template when we create a new songView.
 
+1. **Create the ability to render**  
 We then define a `render()` function that we will call when we are ready to display our song in the DOM.
 
-
+1. **Define our events and the corresponding event handlers**  
 Another responsibility the view handles are click events! We first define the events, then define the callback functions.
 
 ```javascript
@@ -206,7 +209,7 @@ var SongView = Backbone.View.extend({
     return this;
   },
   events: {
-    'click h3': "seeArtist"
+    'click h3': 'seeArtist'
   },
   seeArtist: function(e) {
     this.$el.append(this.model.attributes.artist);
@@ -214,7 +217,7 @@ var SongView = Backbone.View.extend({
 });
 ```
 
-We are still not going to see anything in the browser window quite yet, we will call the .render() function on each song using a view for our collection!
+We are still not going to see anything in the browser window quite yet.  We still need to call the `render` function on each song! We will do this within a view that we create for our collection of songs.
 
 
 ### Collection View
