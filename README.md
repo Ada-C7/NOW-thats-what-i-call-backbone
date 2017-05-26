@@ -3,13 +3,15 @@ We have come a long way from our mixtape days. You're a little older, wiser and 
 
 With this exercise, we are going to make a backbone application (from scratch!) that will display the track list of a mix CD. To make it even more slick, when we click on a song title, the artists name will appear below the title. WILD!
 
-The goal of this exercise is to gain exposure to some of the Backbone vocabulary and concepts that we will exploring in depth in the next few weeks. The goal of this exercise is *not* to fully understand every Backbone component... yet!
+The goal of this exercise is to gain exposure to *some* of the Backbone vocabulary and concepts that we will exploring in depth in the next few weeks. **The goal of this exercise is not to fully understand every Backbone component!! We will do this in the following week of class.**
+
+Note that if you get stuck at any point, look at the `solution` branch of this repository which has the full implementation. We don't want you to struggle a great deal with syntax and errors. Definitely copy and paste!
 
 Let's jump in!
 
 
 ### Create the files
-In terminal,
+In the terminal:
 ```Bash
 mkdir now-thats-what-i-call-backbone
 cd now-thats-what-i-call-backbone
@@ -221,14 +223,14 @@ We are still not going to see anything in the browser window quite yet.  We stil
 
 
 ### Collection View
-This has a similar structure to the SongView, but one major difference that we are going to create new `SongView` instances in the `render` function. Then we have each of the instances append to our song-list `ul`. 
+This has a similar structure to the SongView, but one major difference that we are going to create new `SongView` instances in the `render` function. Then we have each of the instances append to our song-list `ul`.
 
-You may have noticed that we never wrapped the `h3` element in our underscore template with an `li` element. Because we don't need to! 
+You may have noticed that we never wrapped the `h3` element in our underscore template with an `li` element. Because we don't need to!
 
 When we create the new songView instances, we're passing in an object with a few properties:
-- The first is the song model instance, 
-- Then the underscore template
-- The third is the element we are wrapping the all the template's html code around, which is an `li`. It's kind of weird. 
+- The song model instance
+- The underscore template
+- The HTML element we want to use as the containing element for all of the HTML in the view. Another way to describe this is that all of the HTML we defined _inside_ of this view, will be put inside the `tagName` element, which is an `li` in this case. Note that this does not need to be an existing element in our DOM, it can be totally new and fresh!
 
 ```javascript
 var MixCdView = Backbone.View.extend({
@@ -255,13 +257,13 @@ var MixCdView = Backbone.View.extend({
 ### HOT DOM!
 Now is the time where we can see our data come alive in the browser window!  
 
-No create a new instance of the collection view and call `.render()` on it. In the render function, an object with the following properties are being passed in: 
+Now create a new instance of the collection view and call `.render()` on it. In the render function, an object with the following properties is being passed in:
 - **Model**: The collection of songs we made earlier, ``summer04``
-- **Template**: The underscore template we set in the html and gave an id of 'song-template'
-- **el**: This the element where we want to append all of our songs to. It will be the parent element to our songs view.
+- **Template**: The Underscore template we set in the HTML and gave an id of 'song-template'
+- **el**: This the element where we want to append all of our songs to. It will be the parent element to our songs view and exist already in our DOM (unlike the `li` in our `SongView`).
 
 
-Once we create the collection view, we have to call the ``.render()`` function on the collection view in order to have our list of songs load to the dom. Only then can we see our list of songs come alive in the browser window!
+Once we create the collection view, we have to call the ``.render()`` function on the collection view in order to have our list of songs load to the DOM. Only then can we see our list of songs come alive in the browser window!
 
 ```javascript
 $(document).ready(function() {
@@ -278,14 +280,14 @@ $(document).ready(function() {
 Click on a few of the song's titles and crack open dev tools and look around at all the element in the DOM.
 
 
-### That's it!
+### Now You've Done It!
 To see all the code together, checkout the 'solution' branch of this repository.
 
 
 ### Conclusion
-This walkthrough was a friendly introduction to three major components (models, collections and views) that go into organizing javascript code with backbone and how they connect with each other.
+This walkthrough was a friendly introduction to three major components (models, collections and views) that go into organizing JavaScript code with Backbone and how they connect with each other.
 
-Next week we will dive deeper into everything covered in this exercise. But if you're feeling
+Next week we will dive deeper into everything covered in this exercise, including splitting all of these components out into separate folders and files. If you feel like you gained exposure to the vocabulary and at a very high level see what these Backbone components _could_ be used for, you're **right on track**!!!
 
 #### Lecture Resources
 - [Introduction to Backbone](https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/backbone-week1/11-Backbonejs/Introduction-to-Backbonejs.md)
