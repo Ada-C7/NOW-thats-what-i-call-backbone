@@ -1,7 +1,9 @@
 # NOW That's What I Call Backbone
 We have come a long way from our mixtape days. You're a little older, wiser and now know some new, slick technologies.
 
-With this exercise, we are going to make a relatively simple backbone application (from scratch!) that will display the track list of a mix cd. To make it even more slick, when we click on a song title, the artists name will appear below the title. WILD!
+With this exercise, we are going to make a backbone application (from scratch!) that will display the track list of a mix CD. To make it even more slick, when we click on a song title, the artists name will appear below the title. WILD!
+
+The goal of this exercise is to gain exposure to some of the Backbone vocabulary and concepts that we will exploring in depth in the next few weeks. The goal of this exercise is *not* to fully understand every Backbone component... yet!
 
 Let's jump in!
 
@@ -15,8 +17,8 @@ touch index.html
 touch app.js
 ```
 
-### Link Dependancies
-A benefit of working with Backbone is it's flexibility. It allows us to continue working with familiar libraries, like jQuery and underscore! In order to use them, we need to link them in our HTML.
+### Link Dependencies
+A benefit of working with Backbone is it's flexibility. It allows us to continue working with familiar libraries, like jQuery and Underscore! In order to use them, we need to link them in our HTML.
 
 Create your HTML shell. Then, using a CDN, link to jQuery, underscore and backbone at the bottom (right below the ``<body>`` tag).
 After all our libraries have been linked, link to your js file, ``app.js``.
@@ -32,12 +34,12 @@ After all our libraries have been linked, link to your js file, ``app.js``.
   <body>
   </body>
 
-  <!-- STEP TWO: link all dependances (underscore.js, jQuery.js and Backbone.js) -->
+  <!-- STEP TWO: link all dependencies (underscore.js, jQuery.js and Backbone.js) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js" type="text/javascript"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" type="text/javascript"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone.js" type="text/javascript"></script>
 
-  <!-- STEP THREE: create app.js file and link it -->
+  <!-- STEP THREE: link the app.js file you created from the terminal -->
   <script src="app.js" type="text/javascript"></script>
 </html>
 ```
@@ -111,13 +113,12 @@ var songData = [
 ### Models
 Lets start with something we're familiar with, models!
 
-Creating a model is as simple as setting a capitalized variable to: ``Backbone.Model.extend({ });``.
+To create a model object, we create a "class-like" JavaScript variable which extends the Backbone Model object: ``Backbone.Model.extend({ });``.
 
-In the code below we create a new model for song, then create a song by passing an object with all the properties.
+In the code below we create a new model for our songs, then create a single song model instance by passing in an object with the expected properties.
 
-By having this
 ```javascript
-
+// app.js
 var Song = Backbone.Model.extend({ });
 
 var song1 = new Song({
@@ -127,17 +128,17 @@ var song1 = new Song({
 });
 
 console.log(song1.get("title") +  " is by: " + song1.get("artist"));
-
 ```
 
 
 ### Collections
-Collections allow us to handle many instances of a model in a more efficient way. Because we want a many songs on our cd, instead of a single, let's make a collection!
+Collections allow us to handle many instances of a model in a more efficient way. Because we want many songs on our cd, instead of a single song, let's make a collection!
 
-Much like model, starting a collection is pretty simple. All we have to do is set another capitalized, camel-cased variable to ``Backbone.Collection.extend({});``.  Inside, we set what model this is a collection of, in this case, it's songs.
+Much like the model, starting a collection requires us to extend the Backbone Collection object. All we have to do is set another capitalized, camel-cased variable to ``Backbone.Collection.extend({});``.  Inside, we set the collection up to point to the *model* this is a collection of, in this case, it is the Song object.
 
-Now we can use our array of songs and
+Now we can pass our array of songs in to our collection and Backbone will understand that we want each of these to be a Song object!
 ```javascript
+// app.js
 var MixCd = Backbone.Collection.extend({
   model: Song
 });
@@ -145,15 +146,14 @@ var MixCd = Backbone.Collection.extend({
 // Fly new mix CD of songs for the summer
 var summer04 = new MixCd(songData);
 
-// See all the songs' titles displayed in console! 
-summer04.each(function(song) {
-  console.log(song.get("title"));
+// See all the songs' titles displayed in console!
+summer04.each(function(song) {    // Backbone has an each function
+  console.log(song.get("title")); // We can access each property using a get function
 });
 ```
 
 
-
-## VIEWS
+## Views
 At this point we have only organized or data into models
 ```html
 <header>
