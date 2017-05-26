@@ -150,6 +150,7 @@ var MixCd = Backbone.Collection.extend({
 // Fly new mix CD of songs for the summer
 var summer04 = new MixCd(songData);
 
+
 // See all the songs' titles displayed in console!
 summer04.each(function(song) {
   console.log(song.get("title"));
@@ -223,7 +224,7 @@ We are still not going to see anything in the browser window quite yet, we will 
 
 
 ### Collection View
-This has a similar structure to the SongView, but notice how we are creating new SongView instances in render(). Then we have each of the instances append to our song-list ul. 
+This has a similar structure to the SongView, but notice how we are creating new SongView instances in render(). Then we have each of the instances append to our song-list ul.
 
 
 ```javascript
