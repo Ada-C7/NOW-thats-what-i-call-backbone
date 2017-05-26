@@ -221,8 +221,14 @@ We are still not going to see anything in the browser window quite yet.  We stil
 
 
 ### Collection View
-This has a similar structure to the SongView, but one major difference that we are going to create new `SongView` instances in the `render` function. Then we have each of the instances append to our song-list `ul`.
+This has a similar structure to the SongView, but one major difference that we are going to create new `SongView` instances in the `render` function. Then we have each of the instances append to our song-list `ul`. 
 
+You may have noticed that we never wrapped the `h3` element in our underscore template with an `li` element. Because we don't need to! 
+
+When we create the new songView instances, we're passing in an object with a few properties:
+- The first is the song model instance, 
+- Then the underscore template
+- The third is the element we are wrapping the all the template's html code around, which is an `li`. It's kind of weird. 
 
 ```javascript
 var MixCdView = Backbone.View.extend({
@@ -249,6 +255,7 @@ var MixCdView = Backbone.View.extend({
 ### HOT DOM!
 Now is the time where we can see our data come alive in the browser window!  
 
+No create a new instance of the collection view and call `.render()` on it. In the render function, an object with the following properties are being passed in: 
 - **Model**: The collection of songs we made earlier, ``summer04``
 - **Template**: The underscore template we set in the html and gave an id of 'song-template'
 - **el**: This the element where we want to append all of our songs to. It will be the parent element to our songs view.
@@ -268,6 +275,8 @@ $(document).ready(function() {
   mixCdView.render();
 });
 ```
+Click on a few of the song's titles and crack open dev tools and look around at all the element in the DOM.
+
 
 ### That's it!
 To see all the code together, checkout the 'solution' branch of this repository.
