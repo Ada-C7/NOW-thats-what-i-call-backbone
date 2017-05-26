@@ -105,9 +105,9 @@ var SongView = Backbone.View.extend({
     return this;
   }, // render
   events: {
-    'click h3': "seeAlert"
+    'click h3': "seeArtist"
   },
-  seeAlert: function(e) {
+  seeArtist: function(e) {
     this.$el.append(this.model.attributes.artist);
   }
 });
