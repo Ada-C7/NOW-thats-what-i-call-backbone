@@ -187,7 +187,7 @@ Now back to JavaScript! The following instructions define how we are going to ut
 1. **Create the View**  
 First, we are creating a new Backbone View for a song by extending the Backbone View object: `Backbone.View.extend`.
 
-1. **Create the `initialize`*  
+1. **Create the `initialize`**  
 In the initialize function, we set the template by passing it as an argument. This variable will eventually be set to the #song-template when we create a new songView.
 
 1. **Create the ability to render**  
@@ -221,7 +221,7 @@ We are still not going to see anything in the browser window quite yet.  We stil
 
 
 ### Collection View
-This has a similar structure to the SongView, but notice how we are creating new SongView instances in render(). Then we have each of the instances append to our song-list ul.
+This has a similar structure to the SongView, but one major difference that we are going to create new `SongView` instances in the `render` function. Then we have each of the instances append to our song-list `ul`.
 
 
 ```javascript
@@ -244,8 +244,6 @@ var MixCdView = Backbone.View.extend({
 });
 
 ```
-
-
 
 
 ### HOT DOM!
