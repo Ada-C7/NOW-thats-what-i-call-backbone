@@ -132,15 +132,17 @@ console.log(song1.get("title") +  " is by: " + song1.get("artist"));
 
 
 ### Collections
+Collections allow us to handle many instances of a model in a more efficient way. Because we want a many songs on our cd, instead of a single, let's make a collection!
 
+Much like model, starting a collection is pretty simple. All we have to do is set another capitalized, camel-cased variable to ``Backbone.Collection.extend({});``.  Inside, we set what model this is a collection of, in this case, it's songs.
 
+Now we can use our array of songs and
 ```javascript
-// Fly new mix CD of songs for the summer
 var MixCd = Backbone.Collection.extend({
   model: Song
 });
 
-// Lets make a collection (from our song data)
+// Fly new mix CD of songs for the summer
 var summer04 = new MixCd(songData);
 
 summer04.each(function(song) {
@@ -220,3 +222,16 @@ $(document).ready(function() {
   mixCdView.render();
 });
 ```
+
+
+
+### Conclusion
+
+
+
+### Lecture Resources
+- [Introduction to Backbone](https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/backbone-week1/11-Backbonejs/Introduction-to-Backbonejs.md)
+- [Backbone Models](https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/backbone-week1/11-Backbonejs/Backbone-Models.md)
+- [Backbone Collections](https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/backbone-week1/11-Backbonejs/Backbone-Collections.md)
+- [Backbone Views](https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/backbone-week1/11-Backbonejs/Backbone-Views.md)
+-[Backbone Collection Views](https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/backbone-week1/11-Backbonejs/Views-of-Collections.md)
