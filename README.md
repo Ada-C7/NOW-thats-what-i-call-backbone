@@ -145,6 +145,7 @@ var MixCd = Backbone.Collection.extend({
 // Fly new mix CD of songs for the summer
 var summer04 = new MixCd(songData);
 
+// See all the songs' titles displayed in console! 
 summer04.each(function(song) {
   console.log(song.get("title"));
 });
@@ -152,7 +153,20 @@ summer04.each(function(song) {
 
 
 
+## VIEWS
+At this point we have only organized or data into models
+```html
+<header>
+  <h1> Jamie's Totally Awesome Mix CD </h1>
+</header>
+<main>
+  <ul class="song-list"> </ul>
+</main>
 
+<script id= "song-template" type="text/template">
+  <h3><%- title %></h3>
+</script>
+```
 
 ### Song View
 
@@ -208,13 +222,20 @@ var MixCdView = Backbone.View.extend({
 
 
 ### HOT DOM!
+Now is the time where we can see our data come alive in the browser window!  
+
+- **Model**: The collection of songs we made earlier, ``summer04``
+- **Template**: The underscore template we set in the html and gave an id of 'song-template'
+- **el**: This the element where we want to append all of our songs to. It will be the parent element to our songs view.
+
+
+Once we create the collection view, we have to call the ``.render()`` function on the collection view in order to have our list of songs load to the dom. Only then can we see our list of songs come alive in the browser window!
 
 ```javascript
 $(document).ready(function() {
-  mixCd = new MixCd(songData);
 
   var mixCdView = new MixCdView({
-    model: mixCd,
+    model: summer04,
     template: _.template($('#song-template').html()),
     el: 'main'
   });
@@ -223,13 +244,16 @@ $(document).ready(function() {
 });
 ```
 
+### That's it!
+To see all the code together, checkout the 'solution' branch of this repository.
 
 
 ### Conclusion
+This walkthrough was a friendly introduction to three major components (models, collections and views) that go into organizing javascript code with backbone and how they connect with each other.
 
+Next week we will dive deeper into everything covered in this exercise. But if you're feeling
 
-
-### Lecture Resources
+#### Lecture Resources
 - [Introduction to Backbone](https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/backbone-week1/11-Backbonejs/Introduction-to-Backbonejs.md)
 - [Backbone Models](https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/backbone-week1/11-Backbonejs/Backbone-Models.md)
 - [Backbone Collections](https://github.com/Ada-Developers-Academy/textbook-curriculum/blob/backbone-week1/11-Backbonejs/Backbone-Collections.md)
