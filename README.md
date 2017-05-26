@@ -46,7 +46,7 @@ After all our libraries have been linked, link to your js file, ``app.js``.
 
 
 ### Initial Data
-Our mix cd will be based on the following array of objects with song data.
+Our mix cd will be based on the following array of objects, where each object represents a song.
 
 Copy this code to the top of your ``app.js`` file:
 ```JavaScript
@@ -110,12 +110,15 @@ var songData = [
 ```
 
 
+
 ### Models
-Lets start with something we're familiar with, models!
+Lets start with something we're familiar with, models! We are going to take the songData and turn each object into an instance of a Song model.
 
 To create a model object, we create a "class-like" JavaScript variable which extends the Backbone Model object: ``Backbone.Model.extend({ });``.
 
 In the code below we create a new model for our songs, then create a single song model instance by passing in an object with the expected properties.
+
+Once the song is an instance, we can call the ``.get()`` function to return one of it's attributes, like we did with the console.log at the bottom of this code snippet.
 
 ```javascript
 // app.js
@@ -130,13 +133,15 @@ var song1 = new Song({
 console.log(song1.get("title") +  " is by: " + song1.get("artist"));
 ```
 
+We don't only have one song though.. so this is where collections come in!
 
 ### Collections
-Collections allow us to handle many instances of a model in a more efficient way. Because we want many songs on our cd, instead of a single song, let's make a collection!
+Collections allow us to handle many instances of a model in a more efficient way. We want many songs on our cd, instead of a single song, let's make a collection!
 
 Much like the model, starting a collection requires us to extend the Backbone Collection object. All we have to do is set another capitalized, camel-cased variable to ``Backbone.Collection.extend({});``.  Inside, we set the collection up to point to the *model* this is a collection of, in this case, it is the Song object.
 
-Now we can pass our array of songs in to our collection and Backbone will understand that we want each of these to be a Song object!
+When we create a new collection, we can pass an array of objects (like songData) as an argument. Doing so will create all the new song models for us!
+
 ```javascript
 // app.js
 var MixCd = Backbone.Collection.extend({
@@ -151,24 +156,42 @@ summer04.each(function(song) {    // Backbone has an each function
   console.log(song.get("title")); // We can access each property using a get function
 });
 ```
-
+All of our song data is now nicely organized, but we still don't see anything! This is partially where our views come into play.
 
 ## Views
-At this point we have only organized or data into models
+### HTML Templates
+
+Let's create our view with something familiar, HTML and underscore. We want to dynamically show the list of song elements from the array of data we created at the beginning.
+
+To do this, we will use an empty `ul` tag to populate dynamically with `li` elements, containing the data from our collection of songs. We will create the `li` elements using an Underscore template. Our Underscore template is called `song-template` and will inject a song's title into our `ul`.
+
+The following code should go between your index.html's ``<body>`` tags.
+
 ```html
 <header>
-  <h1> Jamie's Totally Awesome Mix CD </h1>
+  <h1> Ada's Totally Awesome Summer '04 Mix CD </h1>
 </header>
 <main>
   <ul class="song-list"> </ul>
 </main>
 
-<script id= "song-template" type="text/template">
+<script id="song-template" type="text/template">
   <h3><%- title %></h3>
 </script>
 ```
 
+
 ### Song View
+Now back to JavaScript!
+
+There's a lot going on in this code. But first, we are creating a new Backbone View for a song by extending the Backbone View object: `Backbone.View.extend`.
+
+In the initialize function, we set the template by passing it as an argument. This variable will eventually be set to the #song-template when we create a new songView.
+
+We then define a `render()` function that we will call when we are ready to display our song in the DOM.
+
+
+Another responsibility the view handles are click events! We first define the events, then define the callback functions.
 
 ```javascript
 var SongView = Backbone.View.extend({
@@ -183,21 +206,22 @@ var SongView = Backbone.View.extend({
     return this;
   },
   events: {
-    'click h3': "seeAlert"
+    'click h3': "seeArtist"
   },
-  seeAlert: function(e) {
+  seeArtist: function(e) {
     this.$el.append(this.model.attributes.artist);
   }
 });
 ```
 
-
+We are still not going to see anything in the browser window quite yet, we will call the .render() function on each song using a view for our collection!
 
 
 ### Collection View
+This has a similar structure to the SongView, but notice how we are creating new SongView instances in render(). Then we have each of the instances append to our song-list ul.
+
 
 ```javascript
-// COLLECTION
 var MixCdView = Backbone.View.extend({
   initialize: function(params) {
     this.template = params.template;
