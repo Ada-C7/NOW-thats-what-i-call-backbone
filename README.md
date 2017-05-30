@@ -30,15 +30,23 @@ After all our libraries have been linked, link to your js file, ``app.js``.
     <title>NOW That's What I Call Backbone</title>
   </head>
   <body>
+    <main>
+      <ul class="song-list"> </ul>
+    </main>
+    
+    <!-- _template with song title -->
+    <script id= "song-template" type="text/template">
+      <h3><%- title %></h3>
+    </script>
+
+    <!-- STEP TWO: link all dependances (underscore.js, jQuery.js and Backbone.js) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone.js" type="text/javascript"></script>
+
+    <!-- STEP THREE: create app.js file and link it -->
+    <script src="app.js" type="text/javascript"></script>
   </body>
-
-  <!-- STEP TWO: link all dependances (underscore.js, jQuery.js and Backbone.js) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js" type="text/javascript"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" type="text/javascript"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone.js" type="text/javascript"></script>
-
-  <!-- STEP THREE: create app.js file and link it -->
-  <script src="app.js" type="text/javascript"></script>
 </html>
 ```
 
